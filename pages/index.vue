@@ -71,7 +71,6 @@ export default {
     ...mapGetters('authen', ['me']),
   },
   methods: {
-    ...mapActions('authen', ['getMe']),
     ...mapMutations('authen', ['setAuth']),
     async submit() {
       this.loading = true
