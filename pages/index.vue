@@ -10,7 +10,7 @@
       </div>
       <div class="py-10 text-center">
         <b class="text-xl">
-          ระบบจ่ายค่าเทอม <br />
+          รับบัตรลงทะเบียนเรียน <br />
           ภาคเรียนที่ 2/2564
         </b>
         <br />
@@ -58,40 +58,40 @@
 </template>
 
 <script>
-import Swal from 'sweetalert2'
-import { mapActions, mapGetters, mapMutations } from 'vuex'
+import Swal from "sweetalert2";
+import { mapActions, mapGetters, mapMutations } from "vuex";
 export default {
-  middleware: 'guest',
-  layout: 'authLayout',
+  middleware: "guest",
+  layout: "authLayout",
   data: () => ({
     form: { sid: null, sid: null },
     loading: false,
   }),
   computed: {
-    ...mapGetters('authen', ['me']),
+    ...mapGetters("authen", ["me"]),
   },
   methods: {
-    ...mapMutations('authen', ['setAuth']),
+    ...mapMutations("authen", ["setAuth"]),
     async submit() {
-      this.loading = true
+      this.loading = true;
       try {
-        const user = await this.$axios.$post('api/login', this.form)
-        this.setAuth(user.result)
-        if (user.result.role && user.result.role === 'admin') {
-          this.$router.push('/admin/students')
+        const user = await this.$axios.$post("api/login", this.form);
+        this.setAuth(user.result);
+        if (user.result.role && user.result.role === "admin") {
+          this.$router.push("/admin/students");
         } else {
-          this.$router.push('/view')
+          this.$router.push("/view");
         }
       } catch (err) {
         Swal.fire({
-          icon: 'error',
+          icon: "error",
           html: `${err?.response?.data?.message}`,
-        })
+        });
       }
-      this.loading = false
+      this.loading = false;
     },
   },
-}
+};
 </script>
 
 <style>
